@@ -1,0 +1,51 @@
+package com.meta.api.fis;
+
+import java.util.ArrayList;
+import java.util.List;
+import org.junit.Before;
+import org.junit.Test;
+import static org.hamcrest.Matchers.*;
+import io.restassured.RestAssured;
+import io.restassured.response.Response;
+import junit.framework.Assert;
+
+public class API_FIS {
+
+
+	//@Test
+	public void getAllStudents()
+	{
+		System.out.println("===getAllStudent====");
+
+		String listbpi = RestAssured.
+				given()
+				 	.contentType("application/json").
+				when()
+				 	.get("https://api.coindesk.com/v1/bpi/currentprice.json").
+				then()
+				    .statusCode(200)
+				 	.extract().path("bpi");
+				Assert.assertTrue(listbpi.equals("USD GBP EUR"));
+		
+	}	
+
+	//@Test
+	public void getGBPdescription()
+	{
+		System.out.println("===getAGBPdescription====");
+
+		String GBPdescription = RestAssured.
+	            given()
+	                  .contentType("application/json").
+	            when()
+	                  .get("https://api.coindesk.com/v1/bpi/currentprice.json").
+	            then()
+	                  .statusCode(200)
+	                  .extract().path("bpi.GBP.description");
+	    Assert.assertTrue(GBPdescription.equals("British Pound Sterling"));
+
+		System.out.println(GBPdescription);
+	}	
+
+
+}
